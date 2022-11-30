@@ -15,14 +15,14 @@ center.appendChild(gameBoard);
 
 // Hard coded initialisation of start variable --> false= dead, true = alive // 2D array-matrix
 let start = [
+  [true, false, true, false, false, false, false, false],
+  [false, true, true, false, false, false, false, false],
+  [false, true, false, false, false, false, false, false],
   [false, false, false, false, false, false, false, false],
+  [false, false, false, true, false, true, false, false],
+  [false, false, false, false, true, true, false, false],
+  [false, false, false, false, true, false, false, false],
   [false, false, false, false, false, false, false, false],
-  [false, false, false, false, false, false, false, false],
-  [false, false, false, false, false, false, false, false],
-  [false, false, false, false, false, false, false, false],
-  [false, false, false, false, false, false, false, false],
-  [true, true, true, false, false, false, false, false],
-  [true, true, true, true, false, false, false, false],
 ];
 
 // renders table element "gameBoard"
@@ -59,8 +59,8 @@ const updateCycle = function () {
   // copy of 2D array (=== nested array)
   let startUpdate = JSON.parse(JSON.stringify(start));
   // iteration through array
-  for (let i = 0; i < start.length - 1; i++) {
-    for (let j = 0; j < start[i].length - 1; j++) {
+  for (let i = 0; i < start.length; i++) {
+    for (let j = 0; j < start[i].length; j++) {
       //   conditions to change values of 2d array at position i,j;
       console.log(i, j);
       if (start[i][j]) {
@@ -86,22 +86,31 @@ const updateCycle = function () {
 // count number of neighbouring cells with value true
 const findNeighbours = function (n, m) {
   let counter = 0;
-  if (
-    n - 1 < 0 ||
-    n + 1 > start.length ||
-    m - 1 < 0 ||
-    m + 1 > start[n].length
-  ) {
-  } else {
-    for (let i = n - 1; i <= n + 1; i++) {
-      for (let j = m - 1; j <= m + 1; j++) {
-        if (i === n && j === m) {
-        } else if (start[i][j]) {
-          counter++;
-        }
+  //   if (
+  //     n - 1 < 0 ||
+  //     n + 1 > start.length ||
+  //     m - 1 < 0 ||
+  //     m + 1 > start[n].length
+  //   ) {
+  //   } else {
+  for (let i = n - 1; i <= n + 1; i++) {
+    if (i < 0 || i >= start.length) {
+      continue;
+    }
+    for (let j = m - 1; j <= m + 1; j++) {
+      //   if (!start[i] || start[i].length < 1) {
+      //     debugger;
+      //   }
+      if (j < 0 || j >= start[i].length) {
+        continue;
+      }
+      if (i === n && j === m) {
+      } else if (start[i][j]) {
+        counter++;
       }
     }
   }
+  //   }
   // returned counter will be used in updateCycle to check conditions
   return counter;
 };
@@ -111,10 +120,11 @@ const findNeighbours = function (n, m) {
 // updateCycle();
 // // showCycle();
 
+showCycle();
 // method to use on button click
 const next = function () {
-  showCycle();
   updateCycle();
+  showCycle();
 };
 
 // function x() {
