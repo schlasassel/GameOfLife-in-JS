@@ -16,3 +16,8 @@ body {
 .alive {
   background-color: rgb(227, 8, 8);
 }
+
+.hidden {
+  height: 30px;
+  width: 30px;
+}
