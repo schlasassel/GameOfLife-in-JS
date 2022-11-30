@@ -1,17 +1,7 @@
 "use strict";
 
-// Creates HTML-Element centered on page
-const center = document.createElement("center");
-
 // Creates HTML-DOM table object
-let gameBoard = document.createElement("table");
-
-// Defines table size
-gameBoard.setAttribute("cellspacing", "0");
-gameBoard.setAttribute("width", "270px");
-
-// Appends Child (gameBoard) to the DOM-Element "center"
-center.appendChild(gameBoard);
+let gameBoard = document.getElementById("gameBoard");
 
 // Hard coded initialisation of start variable --> false= dead, true = alive // 2D array-matrix
 let start = [
@@ -86,21 +76,11 @@ const updateCycle = function () {
 // count number of neighbouring cells with value true
 const findNeighbours = function (n, m) {
   let counter = 0;
-  //   if (
-  //     n - 1 < 0 ||
-  //     n + 1 > start.length ||
-  //     m - 1 < 0 ||
-  //     m + 1 > start[n].length
-  //   ) {
-  //   } else {
   for (let i = n - 1; i <= n + 1; i++) {
     if (i < 0 || i >= start.length) {
       continue;
     }
     for (let j = m - 1; j <= m + 1; j++) {
-      //   if (!start[i] || start[i].length < 1) {
-      //     debugger;
-      //   }
       if (j < 0 || j >= start[i].length) {
         continue;
       }
@@ -115,11 +95,6 @@ const findNeighbours = function (n, m) {
   return counter;
 };
 
-// manual method calls to check functionality
-// showCycle();
-// updateCycle();
-// // showCycle();
-
 showCycle();
 // method to use on button click
 const next = function () {
@@ -127,6 +102,15 @@ const next = function () {
   showCycle();
 };
 
+/////////////////////////////////////////////////////
+//ToDo:
+//previousCycle
+//dynamic cell selection
+//timer - start and stop?
+//apperance
+
+/////////////////////////////////////////////////////
+// unfinished timer function
 // function x() {
 //   setTimeout(() => {
 //     console.log("x " + d);
@@ -147,6 +131,3 @@ const next = function () {
 // }
 
 // // blub();
-
-// appends child center to html body element
-document.body.appendChild(center);
